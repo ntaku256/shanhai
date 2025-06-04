@@ -2,65 +2,68 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>上海旅行スライド（レスポンシブ）</title>
+  <title>上海旅行スライド（スマホ縮小）</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
-      padding: 0;
       background: #222;
     }
     .slide-outer {
       width: 100vw;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 36px;
+      gap: 32px;
       padding: 16px 0 32px 0;
     }
     .slide-frame-wrap {
-      /* 16:9 アスペクト比ボックスを作るテクニック */
       position: relative;
-      width: 100%;
+      width: 100vw;
       max-width: 1920px;
       aspect-ratio: 16/9;
-      background: #000;
-      border-radius: 14px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.16);
-      overflow: hidden;
       margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow: visible;
+      background: transparent;
+    }
+    .slide-scaler {
+      width: 1920px;
+      height: 1080px;
+      transform-origin: top left;
+      background: transparent;
     }
     .slide-frame {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+      width: 1920px;
+      height: 1080px;
       border: none;
-      background: #fff;
       border-radius: 14px;
+      background: #fff;
+      display: block;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.16);
     }
-    /* 背景色・中央寄せもスマホPC共通で調整 */
-    html, body {
-      min-height: 100%;
+    @media (min-width: 1920px) {
+      .slide-frame-wrap { width: 1920px; }
+      .slide-scaler { transform: scale(1); }
+    }
+    @media (max-width: 1920px) {
+      .slide-frame-wrap { width: 100vw; max-width: 100vw; }
+      .slide-scaler { transform: scale(calc(100vw / 1920)); }
     }
   </style>
 </head>
 <body>
   <div class="slide-outer">
-    <div class="slide-frame-wrap"><iframe class="slide-frame" src="slides/1.html" loading="lazy"></iframe></div>
-    <div class="slide-frame-wrap"><iframe class="slide-frame" src="slides/2.html" loading="lazy"></iframe></div>
-    <div class="slide-frame-wrap"><iframe class="slide-frame" src="slides/3.html" loading="lazy"></iframe></div>
-    <div class="slide-frame-wrap"><iframe class="slide-frame" src="slides/4.html" loading="lazy"></iframe></div>
-    <div class="slide-frame-wrap"><iframe class="slide-frame" src="slides/5.html" loading="lazy"></iframe></div>
-    <div class="slide-frame-wrap"><iframe class="slide-frame" src="slides/6.html" loading="lazy"></iframe></div>
-    <div class="slide-frame-wrap"><iframe class="slide-frame" src="slides/7.html" loading="lazy"></iframe></div>
-    <div class="slide-frame-wrap"><iframe class="slide-frame" src="slides/8.html" loading="lazy"></iframe></div>
-    <div class="slide-frame-wrap"><iframe class="slide-frame" src="slides/9.html" loading="lazy"></iframe></div>
-    <div class="slide-frame-wrap"><iframe class="slide-frame" src="slides/10.html" loading="lazy"></iframe></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/1.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/2.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/3.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/4.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/5.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/6.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/7.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/8.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/9.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/10.html" loading="lazy"></iframe></div></div>
+    <!-- 必要な分だけ繰り返し -->
   </div>
 </body>
 </html>
