@@ -5,17 +5,42 @@
   <title>レスポンシブ上海スライド</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    :root {
+      /* Light theme */
+      --bg-main: #f9f9fa;
+      --bg-slide: #fff;
+      --color-text: #222;
+      --color-btn: #4f8cff;
+      --color-btn-text: #fff;
+      --bg-page: #e3eafc;
+      --color-page: #222;
+      --btn-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-main: #181a1b;
+        --bg-slide: #23272b;
+        --color-text: #fff;
+        --color-btn: #3270e2;
+        --color-btn-text: #fff;
+        --bg-page: #364052;
+        --color-page: #fff;
+        --btn-shadow: 0 2px 8px rgba(0,0,0,0.20);
+      }
+    }
     body {
       margin: 0;
-      background: #222;
+      background: var(--bg-main);
+      color: var(--color-text);
+      font-family: 'Noto Sans JP', sans-serif;
     }
     .slide-outer {
       width: 100vw;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 32px;
-      padding: 16px 0 32px 0;
+      gap: 40px;
+      padding: 32px 0 48px 0;
     }
     .slide-frame-wrap {
       position: relative;
@@ -24,7 +49,6 @@
       background: transparent;
       overflow: visible;
       margin: 0 auto;
-      /* 高さはJSで自動調整 */
       transition: height 0.3s;
     }
     .slide-scaler {
@@ -37,10 +61,56 @@
       width: 1920px;
       height: 1080px;
       border: none;
-      border-radius: 14px;
-      background: #fff;
+      border-radius: 18px;
+      background: var(--bg-slide);
       display: block;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.16);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 24px;
+      font-size: 2rem;
+    }
+    .nav-btn {
+      font-size: 2rem;
+      padding: 16px 40px;
+      border-radius: 999px;
+      border: none;
+      background: var(--color-btn);
+      color: var(--color-btn-text);
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: var(--btn-shadow);
+      transition: background 0.2s, transform 0.2s;
+      user-select: none;
+    }
+    .nav-btn:active {
+      background: #1b58a2;
+      transform: scale(0.98);
+    }
+    .nav-btn:disabled {
+      background: #b7cee8;
+      color: #e6ecf6;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    .page-num {
+      min-width: 90px;
+      text-align: center;
+      font-weight: 900;
+      font-size: 2.2rem;
+      border-radius: 16px;
+      background: var(--bg-page);
+      color: var(--color-page);
+      padding: 12px 24px;
+      margin: 0 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+      letter-spacing: 2px;
+      user-select: none;
+      transition: background 0.2s, color 0.2s;
     }
   </style>
 </head>
@@ -51,10 +121,10 @@
         <iframe id="slide-frame" class="slide-frame" src="slides/1.html" loading="lazy"></iframe>
       </div>
     </div>
-    <div style="text-align:center; margin-top:16px;">
-      <button id="prevBtn">前へ</button>
-      <span id="slideNum"></span>
-      <button id="nextBtn">次へ</button>
+    <div class="nav-container">
+      <button id="prevBtn" class="nav-btn">← 前へ</button>
+      <span id="slideNum" class="page-num"></span>
+      <button id="nextBtn" class="nav-btn">次へ →</button>
     </div>
   </div>
   <script>
@@ -65,6 +135,8 @@
       const frame = document.getElementById('slide-frame');
       frame.src = `slides/${n}.html`;
       document.getElementById('slideNum').textContent = `${n} / ${slideCount}`;
+      document.getElementById('prevBtn').disabled = n === 1;
+      document.getElementById('nextBtn').disabled = n === slideCount;
     }
     document.getElementById('prevBtn').onclick = () => {
       if (current > 1) { current--; setSlide(current); }
