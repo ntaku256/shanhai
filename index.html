@@ -108,15 +108,15 @@
       // 画面横幅
       const winW = window.innerWidth;
       // iOSではscaleしない（バグ対策）
-      const scale = (!isIOS && winW < 1920) ? (winW / slideW) : 1;
+      const scale = (winW < 1920) ? (winW / slideW) : 1;
       // wrapperの高さを縮小比率で設定
       wrap.style.height = (slideH * scale) + "px";
       scaler.style.transform = `scale(${scale})`;
       // iOS時のみ横スクロール可能に
-      if (isIOS) {
-        wrap.style.overflowX = "auto";
-        scaler.style.transform = "none";
-      }
+      // if (isIOS) {
+      //   wrap.style.overflowX = "auto";
+      //   scaler.style.transform = "none";
+      // }
     }
     window.addEventListener('resize', fitSlideScaler);
     window.addEventListener('DOMContentLoaded', fitSlideScaler);
