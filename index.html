@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>1枚ずつ上海スライド</title>
+  <title>1枚ずつ上海スライド（スマホ対応）</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body { margin: 0; background: #222; }
@@ -11,21 +11,32 @@
       flex-direction: column;
       align-items: center;
       padding: 32px 0;
+      min-height: 100vh;
     }
     .slide-frame-wrap {
       width: 100vw;
       max-width: 1920px;
-      height: calc(100vw * 1080 / 1920);
-      max-height: 1080px;
+      /* 高さはJSで設定 */
       position: relative;
-      margin: 0 auto;
-      background: #fff;
+      margin: 0 auto 32px auto;
+      overflow: visible;
+      background: transparent;
       border-radius: 14px;
       box-shadow: 0 4px 24px rgba(0,0,0,0.16);
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      transition: height 0.3s;
+    }
+    .slide-scaler {
+      width: 1920px;
+      height: 1080px;
+      transform-origin: top left;
+      background: transparent;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .slide-frame {
       width: 1920px;
@@ -49,26 +60,27 @@
       transition: background 0.2s;
     }
     .nav-btn:active { background: #666; }
-    @media (min-width: 1920px) {
-      .slide-frame-wrap { width: 1920px; height: 1080px; }
-    }
   </style>
 </head>
 <body>
   <div class="slide-area">
     <button class="nav-btn" id="prev-btn">&#8593; 前のスライド</button>
     <div class="slide-frame-wrap">
-      <iframe id="slide-frame" class="slide-frame" src="slides/1.html"></iframe>
+      <div class="slide-scaler">
+        <iframe id="slide-frame" class="slide-frame" src="slides/1.html" loading="lazy"></iframe>
+      </div>
     </div>
     <button class="nav-btn" id="next-btn">&#8595; 次のスライド</button>
   </div>
   <script>
+    // スライド一覧
     const slides = [
       "slides/1.html", "slides/2.html", "slides/3.html", "slides/4.html", "slides/5.html",
       "slides/6.html", "slides/7.html", "slides/8.html", "slides/9.html", "slides/10.html"
     ];
     let current = 0;
     const frame = document.getElementById('slide-frame');
+
     function showSlide(idx) {
       if (idx < 0 || idx >= slides.length) return;
       current = idx;
@@ -77,11 +89,38 @@
     }
     document.getElementById('prev-btn').onclick = () => showSlide(current - 1);
     document.getElementById('next-btn').onclick = () => showSlide(current + 1);
-    // キーボードでも
+    // キーボード操作にも対応
     document.addEventListener('keydown', e => {
       if (e.key === 'ArrowUp') showSlide(current - 1);
       if (e.key === 'ArrowDown') showSlide(current + 1);
     });
+
+    // ★画面サイズに合わせて自動縮小
+    function fitSlideScaler() {
+      // iOS Safariはバグ多いので横スクロールで表示（縮小しない）推奨
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.userAgent.includes('Macintosh') && 'ontouchend' in document);
+
+      const wrap = document.querySelector('.slide-frame-wrap');
+      const scaler = document.querySelector('.slide-scaler');
+      // スライド本来の幅
+      const slideW = 1920, slideH = 1080;
+      // 画面横幅
+      const winW = window.innerWidth;
+      // iOSではscaleしない（バグ対策）
+      const scale = (!isIOS && winW < 1920) ? (winW / slideW) : 1;
+      // wrapperの高さを縮小比率で設定
+      wrap.style.height = (slideH * scale) + "px";
+      scaler.style.transform = `scale(${scale})`;
+      // iOS時のみ横スクロール可能に
+      if (isIOS) {
+        wrap.style.overflowX = "auto";
+        scaler.style.transform = "none";
+      }
+    }
+    window.addEventListener('resize', fitSlideScaler);
+    window.addEventListener('DOMContentLoaded', fitSlideScaler);
+
   </script>
 </body>
 </html>
