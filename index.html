@@ -20,14 +20,20 @@
     .slide-frame {
       width: 100vw;
       max-width: 1920px;
-      aspect-ratio: 16/9;
+      height: calc(100vw * 1080 / 1920);
+      max-height: 1080px;
       border: none;
       display: block;
       margin: 0 auto 32px auto;
       border-radius: 14px;
       background: #fff;
       box-shadow: 0 4px 24px rgba(0,0,0,0.16);
-      /* 高さはaspect-ratioで自動 */
+    }
+    @media (min-width: 1920px) {
+      .slide-frame {
+        width: 1920px;
+        height: 1080px;
+      }
     }
   </style>
 </head>
