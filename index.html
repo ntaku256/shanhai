@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>上海旅行スライド（スマホ縮小）</title>
+  <title>レスポンシブ上海スライド</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -21,10 +21,11 @@
       position: relative;
       width: 100vw;
       max-width: 1920px;
-      aspect-ratio: 16/9;
-      margin: 0 auto;
-      overflow: visible;
       background: transparent;
+      overflow: visible;
+      margin: 0 auto;
+      /* 高さはJSで自動調整 */
+      transition: height 0.3s;
     }
     .slide-scaler {
       width: 1920px;
@@ -41,14 +42,6 @@
       display: block;
       box-shadow: 0 4px 24px rgba(0,0,0,0.16);
     }
-    @media (min-width: 1920px) {
-      .slide-frame-wrap { width: 1920px; }
-      .slide-scaler { transform: scale(1); }
-    }
-    @media (max-width: 1920px) {
-      .slide-frame-wrap { width: 100vw; max-width: 100vw; }
-      .slide-scaler { transform: scale(calc(100vw / 1920)); }
-    }
   </style>
 </head>
 <body>
@@ -56,14 +49,19 @@
     <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/1.html" loading="lazy"></iframe></div></div>
     <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/2.html" loading="lazy"></iframe></div></div>
     <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/3.html" loading="lazy"></iframe></div></div>
-    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/4.html" loading="lazy"></iframe></div></div>
-    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/5.html" loading="lazy"></iframe></div></div>
-    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/6.html" loading="lazy"></iframe></div></div>
-    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/7.html" loading="lazy"></iframe></div></div>
-    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/8.html" loading="lazy"></iframe></div></div>
-    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/9.html" loading="lazy"></iframe></div></div>
-    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/10.html" loading="lazy"></iframe></div></div>
     <!-- 必要な分だけ繰り返し -->
   </div>
+  <script>
+    function setSlideHeights() {
+      const winW = window.innerWidth;
+      const scale = winW >= 1920 ? 1 : winW / 1920;
+      document.querySelectorAll('.slide-frame-wrap').forEach(wrap => {
+        wrap.style.height = (1080 * scale) + 'px';
+        wrap.querySelector('.slide-scaler').style.transform = `scale(${scale})`;
+      });
+    }
+    window.addEventListener('resize', setSlideHeights);
+    window.addEventListener('DOMContentLoaded', setSlideHeights);
+  </script>
 </body>
 </html>
