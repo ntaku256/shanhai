@@ -80,7 +80,7 @@
     // 300ms間隔で反映
     const debouncedSetSlideHeights = debounce(setSlideHeights, 300);
 
-    window.addEventListener('resize', debouncedSetSlideHeights);
+    // window.addEventListener('resize', debouncedSetSlideHeights);
     window.addEventListener('DOMContentLoaded', setSlideHeights);
   </script>
 </body>
