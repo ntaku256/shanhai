@@ -98,8 +98,8 @@
     // ★画面サイズに合わせて自動縮小
     function fitSlideScaler() {
       // iOS Safariはバグ多いので横スクロールで表示（縮小しない）推奨
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-        (navigator.userAgent.includes('Macintosh') && 'ontouchend' in document);
+      // const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      //   (navigator.userAgent.includes('Macintosh') && 'ontouchend' in document);
 
       const wrap = document.querySelector('.slide-frame-wrap');
       const scaler = document.querySelector('.slide-scaler');
