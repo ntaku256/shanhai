@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2日目スケジュール</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .slide-container {
+            width: 100vw;      /* 画面幅ぴったり */
+            max-width: 1920px; /* PCでは最大1920px */
+            aspect-ratio: 16/9;
+            min-height: unset; /* 1080pxは消す */
+            height: auto;      /* 高さは自動調整 */
+            margin: 0 auto;
+            /* 必要に応じて下padding追加 */
+            background: linear-gradient(135deg, #667eea 0%, #4a7c8c 100%);
+        }
+        .timeline-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            padding-bottom: 60px;
+        }
+        .timeline-item {
+            margin-bottom: 0.6rem;
+            animation: slideIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .event-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            border-left: 6px solid #10b981;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            height: 85px;
+        }
+        .event-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        }
+        .time-badge {
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            color: white;
+            padding: 0.6rem 1rem;
+            border-radius: 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            min-width: 90px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        .event-image {
+            width: 75px;
+            height: 75px;
+            border-radius: 1rem;
+            object-fit: cover;
+            border: 3px solid #e5e7eb;
+            flex-shrink: 0;
+        }
+        .event-content {
+            flex: 1;
+        }
+        .event-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .event-description {
+            color: #6b7280;
+            font-size: 0.85rem;
+            line-height: 1.3;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .bottom-citations {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            transform: none;
+            max-width: none;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 0;
+            font-size: 0.65rem;
+            text-align: left;
+            line-height: 1.3;
+        }
+        .citation-column {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: normal;
+            padding: 0 4px;
+        }
+        .header-right-info {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 1.5rem 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container p-6">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8 fade-in">
+            <!-- Left Side: Main Title -->
+            <div class="flex-1">
+                <h1 class="text-5xl font-bold text-white mb-3">
+                    <i class="fas fa-calendar-day mr-4 text-yellow-400"></i>
+                    2日目スケジュール
+                </h1>
+                <p class="text-xl text-gray-200">文化とアートの一日</p>
+            </div>
+            
+            <!-- Right Side: Day Info -->
+            <div class="header-right-info text-white">
+                <div class="text-right">
+                    <div class="text-lg font-bold text-yellow-300 mb-2">上海の多彩な魅力を満喫</div>
+                    <h2 class="text-3xl font-bold text-green-300 mb-2">2日目</h2>
+                    <p class="text-base text-gray-200">アート・文化・夜市体験の充実した一日</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Timeline Container -->
+        <div class="timeline-container">
+            
+            <!-- Event 1: Tianzifang -->
+            <div class="timeline-item" style="animation-delay: 0.2s;">
+                <div class="event-card">
+                    <div class="time-badge">09:30</div>
+                    <img src="https://img-baila.hpplus.jp/common/large/image/41/417968d2-9c42-48f4-9688-725fa28f0a88.jpg" alt="田子坊散策" class="event-image">
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-palette text-pink-600"></i>
+                            田子坊散策
+                        </div>
+                        <div class="event-description">
+                            昔ながらの路地裏をリノベーションしたアートスポット
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 2: Shanghai Tower -->
+            <div class="timeline-item" style="animation-delay: 0.4s;">
+                <div class="event-card">
+                    <div class="time-badge">11:00</div>
+                    <img src="https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/lrg6iddcjze7vvrov36h/%E4%B8%8A%E6%B5%B7%E3%82%BF%E3%83%AF%E3%83%BC118%E9%9A%8E%E5%B1%95%E6%9C%9B%E5%8F%B0%E5%85%A5%E5%A0%B4%E3%83%81%E3%82%B1%E3%83%83%E3%83%88.jpg" alt="上海タワー展望台" class="event-image">
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-building text-blue-600"></i>
+                            上海タワーから市内を一望
+                        </div>
+                        <div class="event-description">
+                            世界有数の高さを誇る展望台からの絶景体験
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 3: M50 Creative Park -->
+            <div class="timeline-item" style="animation-delay: 0.6s;">
+                <div class="event-card">
+                    <div class="time-badge">12:30</div>
+                    <img src="https://dimg04.c-ctrip.com/images/0M70y12000i3jfx1n97C2_C_750_420_R5.png_.webp" alt="M50創意園区" class="event-image">
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-brush text-purple-600"></i>
+                            M50創意園区を散策
+                        </div>
+                        <div class="event-description">
+                            工場跡地をアートギャラリーに改装した創造空間
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 4: Jing'an Temple -->
+            <div class="timeline-item" style="animation-delay: 0.8s;">
+                <div class="event-card">
+                    <div class="time-badge">15:00</div>
+                    <img src="https://stat.ameba.jp/user_images/20190508/00/lucourire/78/dc/j/o4000300014405659056.jpg" alt="静安寺参拝" class="event-image">
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-temple-buddhist text-orange-600"></i>
+                            静安寺参拝
+                        </div>
+                        <div class="event-description">
+                            上海最古のお寺で都会に佇む荘厳な寺院
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 5: Jade Buddha Temple -->
+            <div class="timeline-item" style="animation-delay: 1.0s;">
+                <div class="event-card">
+                    <div class="time-badge">16:30</div>
+                    <img src="https://www.photospot-info.com/wp-content/uploads/2024/06/yuyuan-jadewatercorridor.jpg" alt="玉佛禅寺見学" class="event-image">
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-gem text-teal-600"></i>
+                            玉佛禅寺見学
+                        </div>
+                        <div class="event-description">
+                            境内の庭園の美しさで有名な寺院
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 6: Night Market -->
+            <div class="timeline-item" style="animation-delay: 1.2s;">
+                <div class="event-card">
+                    <div class="time-badge">18:30</div>
+                    <img src="https://www.his-j.com/images/owned-media/trip/uploads/2019/08/Tr00100420181214143130863.jpg" alt="周浦夜市" class="event-image">
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-utensils text-red-600"></i>
+                            周浦夜市で食べ歩き
+                        </div>
+                        <div class="event-description">
+                            地元っ子に愛される活気あふれる夜市
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Bottom Citations - 3 Column Layout -->
+        <div class="bottom-citations">
+            <div class="text-center mb-2">
+                <strong>画像引用:</strong>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+                <div class="citation-column">
+                    <div class="mb-1">• https://img-baila.hpplus.jp/common/large/image/41/417968d2-9c42-48f4-9688-725fa28f0a88.jpg</div>
+                    <div>• https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/lrg6iddcjze7vvrov36h/</div>
+                </div>
+                <div class="citation-column">
+                    <div class="mb-1">• https://dimg04.c-ctrip.com/images/0M70y12000i3jfx1n97C2_C_750_420_R5.png_.webp</div>
+                    <div>• https://stat.ameba.jp/user_images/20190508/00/lucourire/78/dc/j/o4000300014405659056.jpg</div>
+                </div>
+                <div class="citation-column">
+                    <div class="mb-1">• https://www.photospot-info.com/wp-content/uploads/2024/06/yuyuan-jadewatercorridor.jpg</div>
+                    <div>• https://www.his-j.com/images/owned-media/trip/uploads/2019/08/Tr00100420181214143130863.jpg</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

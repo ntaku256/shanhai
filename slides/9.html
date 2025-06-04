@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>静安寺参拝と玉佛禅寺見学</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .slide-container {
+            width: 100vw;      /* 画面幅ぴったり */
+            max-width: 1920px; /* PCでは最大1920px */
+            aspect-ratio: 16/9;
+            min-height: unset; /* 1080pxは消す */
+            height: auto;      /* 高さは自動調整 */
+            margin: 0 auto;
+            /* 必要に応じて下padding追加 */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .main-content-area {
+            height: calc(100% - 100px);
+        }
+        .temple-section {
+            height: 100%;
+            position: relative;
+        }
+        .temple-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .temple-image:hover {
+            transform: scale(1.02);
+        }
+        .temple-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0.7) 100%);
+            z-index: 2;
+        }
+        .temple-content {
+            position: absolute;
+            bottom: 80px;
+            left: 40px;
+            right: 40px;
+            z-index: 3;
+            color: white;
+        }
+        .temple-title {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .jingian-accent {
+            border-left: 4px solid #ffd700;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 140, 0, 0.1) 100%);
+        }
+        .jade-accent {
+            border-left: 4px solid #00ff88;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 255, 0.1) 100%);
+        }
+        .fade-in {
+            animation: fadeIn 1.5s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .slide-in-left {
+            animation: slideInLeft 1s ease-out forwards;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .slide-in-right {
+            animation: slideInRight 1s ease-out forwards;
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .main-title {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px 40px;
+            color: white;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .sparkle {
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+        .bottom-citations {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 20px;
+            font-size: 0.7rem;
+            z-index: 10;
+            word-break: normal;
+        }
+        .divider-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.3) 100%);
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container relative">
+        
+        <!-- Main Title -->
+        <div class="main-title fade-in">
+            <h1 class="text-3xl font-bold mb-2">
+                <i class="fas fa-torii-gate mr-3 text-yellow-400 sparkle"></i>
+                静安寺参拝と玉佛禅寺見学
+            </h1>
+            <p class="text-lg text-gray-200">伝統仏教建築の美と精神世界への誘い</p>
+        </div>
+        
+        <!-- Main Content Area -->
+        <div class="main-content-area">
+            <div class="grid grid-cols-2 h-full">
+                
+                <!-- Left Side - 静安寺 (Jing'an Temple) -->
+                <div class="temple-section slide-in-left" style="animation-delay: 0.3s;">
+                    <img src="https://cdn-ak.f.st-hatena.com/images/fotolife/s/sirokuroomochi/20250328/20250328114328.jpg" 
+                         alt="静安寺" 
+                         class="temple-image">
+                    <div class="temple-overlay"></div>
+                    
+                    <div class="temple-content">
+                        <div class="temple-title jingian-accent">
+                            <h2 class="text-2xl font-bold mb-3 flex items-center">
+                                <i class="fas fa-sun mr-3 text-yellow-400 sparkle"></i>
+                                静安寺参拝
+                            </h2>
+                            <p class="text-base leading-relaxed mb-3">
+                                金色に輝く壮麗な仏教建築で、都市の喧騒の中にある静寂の聖域
+                            </p>
+                            <div class="grid grid-cols-1 gap-2 text-sm">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-400 mr-2"></i>
+                                    <span>1700年の歴史を誇る上海最古の寺院</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-crown text-yellow-400 mr-2"></i>
+                                    <span>純銀製の三体仏像と金色の大殿</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side - 玉佛禅寺 (Jade Buddha Temple) -->
+                <div class="temple-section slide-in-right" style="animation-delay: 0.5s;">
+                    <img src="https://mediaim.expedia.com/destination/9/23805d4d5d8b7ef731cd4e8be068a230.jpg" 
+                         alt="玉佛禅寺" 
+                         class="temple-image">
+                    <div class="temple-overlay"></div>
+                    
+                    <div class="temple-content">
+                        <div class="temple-title jade-accent">
+                            <h2 class="text-2xl font-bold mb-3 flex items-center">
+                                <i class="fas fa-leaf mr-3 text-green-400 sparkle"></i>
+                                玉佛禅寺見学
+                            </h2>
+                            <p class="text-base leading-relaxed mb-3">
+                                純白の玉石仏像と美しい庭園で心の平安を感じる禅の世界
+                            </p>
+                            <div class="grid grid-cols-1 gap-2 text-sm">
+                                <div class="flex items-center">
+                                    <i class="fas fa-gem text-green-400 mr-2"></i>
+                                    <span>1.9mの白玉仏と盧舎那仏</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-tree text-green-400 mr-2"></i>
+                                    <span>四季の花々が美しい中国庭園</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Center Divider Line -->
+        <div class="divider-line"></div>
+        
+        <!-- Bottom Citations -->
+        <div class="bottom-citations">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="citation-column">
+                    <p><strong>静安寺画像引用:</strong></p>
+                    <p>• https://cdn-ak.f.st-hatena.com/images/fotolife/s/sirokuroomochi/20250328/20250328114328.jpg</p>
+                    <p>• https://goldnews.jp/archives/020/201507/55b84807b9cdb.jpg</p>
+                </div>
+                <div class="citation-column">
+                    <p><strong>玉佛禅寺画像引用:</strong></p>
+                    <p>• https://mediaim.expedia.com/destination/9/23805d4d5d8b7ef731cd4e8be068a230.jpg</p>
+                    <p>• https://www.eastchinatrip.com/wp-content/uploads/5.-%E7%8E%89%E5%8D%A7%E4%BD%9B.webp</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

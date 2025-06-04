@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1日目スケジュール</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .slide-container {
+            width: 100vw;      /* 画面幅ぴったり */
+            max-width: 1920px; /* PCでは最大1920px */
+            aspect-ratio: 16/9;
+            min-height: unset; /* 1080pxは消す */
+            height: auto;      /* 高さは自動調整 */
+            margin: 0 auto;
+            /* 必要に応じて下padding追加 */
+            background: linear-gradient(135deg, #667eea 0%, #4a7c8c 100%);
+        }
+        .timeline-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            padding-bottom: 60px;
+        }
+        .timeline-item {
+            margin-bottom: 0.9rem;
+            animation: slideIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .event-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            border-left: 6px solid #ef4444;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            height: 95px;
+        }
+        .event-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        }
+        .time-badge {
+            background: linear-gradient(135deg, #ef4444, #3b82f6);
+            color: white;
+            padding: 0.6rem 1rem;
+            border-radius: 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            min-width: 90px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+        .event-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 1rem;
+            object-fit: cover;
+            border: 3px solid #e5e7eb;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .image-citation {
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            right: 0;
+            font-size: 0.55rem;
+            color: #6b7280;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1px 2px;
+            border-radius: 2px;
+        }
+        .event-content {
+            flex: 1;
+        }
+        .event-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .event-description {
+            color: #6b7280;
+            font-size: 0.85rem;
+            line-height: 1.3;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .bottom-citations {
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            width: 100%;
+            transform: none;
+            max-width: none;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 160px;
+            border-radius: 0;
+            font-size: 0.68rem;
+            text-align: left;
+            line-height: 1.4;
+        }
+        .citation-column {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: normal;
+            width: 100%;
+        }
+        .header-right-info {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.8rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container p-8">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-6 fade-in">
+            <!-- Left Side: Main Title -->
+            <div class="flex-1">
+                <h1 class="text-5xl font-bold text-white mb-3">
+                    <i class="fas fa-calendar-day mr-4 text-yellow-400"></i>
+                    1日目スケジュール
+                </h1>
+                <p class="text-xl text-gray-200">到着・市内観光</p>
+            </div>
+            
+            <!-- Right Side: Day Info -->
+            <div class="header-right-info text-white">
+                <div class="text-right">
+                    <div class="text-lg font-bold text-yellow-300 mb-2">上海到着から夜まで</div>
+                    <h2 class="text-3xl font-bold text-red-300 mb-2">1日目</h2>
+                    <p class="text-base text-gray-200">マグレブから夜景まで、上海の第一印象を満喫</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Timeline Container -->
+        <div class="timeline-container">
+            
+            <!-- Event 1: Airport Arrival -->
+            <div class="timeline-item" style="animation-delay: 0.2s;">
+                <div class="event-card">
+                    <div class="time-badge">12:00</div>
+                    <div style="position: relative;">
+                        <img src="https://res.klook.com/image/upload/c_fill,w_720,h_500,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/drzrpbpmvyf1h4z9uu4s.webp" alt="空港到着" class="event-image">
+                        <div class="image-citation">res.klook.com</div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-plane-arrival text-blue-600"></i>
+                            浦東国際空港到着
+                        </div>
+                        <div class="event-description">
+                            マグレブで市内へ移動
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 2: Lunch -->
+            <div class="timeline-item" style="animation-delay: 0.4s;">
+                <div class="event-card">
+                    <div class="time-badge">13:30</div>
+                    <div style="position: relative;">
+                        <img src="https://img-baila.hpplus.jp/common/large/image/0e/0edab5bb-ebf3-4842-b600-62a772486da6.jpg" alt="新天地ランチ" class="event-image">
+                        <div class="image-citation">img-baila.hpplus.jp</div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-utensils text-red-600"></i>
+                            新天地でランチ
+                        </div>
+                        <div class="event-description">
+                            新天地で本格上海料理を堪能
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 3: Yu Garden -->
+            <div class="timeline-item" style="animation-delay: 0.6s;">
+                <div class="event-card">
+                    <div class="time-badge">15:00</div>
+                    <div style="position: relative;">
+                        <img src="https://www.photospot-info.com/wp-content/uploads/2024/06/yuyuan-jadewatercorridor.jpg" alt="豫園" class="event-image">
+                        <div class="image-citation">photospot-info.com</div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-pagelines text-green-600"></i>
+                            豫園観光
+                        </div>
+                        <div class="event-description">
+                            明代に造られた伝統庭園を散策
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 4: Dinner -->
+            <div class="timeline-item" style="animation-delay: 0.8s;">
+                <div class="event-card">
+                    <div class="time-badge">18:00</div>
+                    <div style="position: relative;">
+                        <img src="https://www.photospot-info.com/wp-content/uploads/2024/04/thebund-nightview-pudongnewarea.jpg" alt="南京東路ディナー" class="event-image">
+                        <div class="image-citation">photospot-info.com</div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-city text-purple-600"></i>
+                            南京東路でディナー
+                        </div>
+                        <div class="event-description">
+                            上海随一の繁華街で夕食
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 5: Hotel Check-in -->
+            <div class="timeline-item" style="animation-delay: 1.0s;">
+                <div class="event-card">
+                    <div class="time-badge">19:30</div>
+                    <div style="position: relative;">
+                        <img src="https://dimg04.c-ctrip.com/images/0M71c12000i3iun21FD8A_C_750_420_R5.png_.webp" alt="ホテルチェックイン" class="event-image">
+                        <div class="image-citation">c-ctrip.com</div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-hotel text-indigo-600"></i>
+                            ホテルチェックイン
+                        </div>
+                        <div class="event-description">
+                            人民広場エリアのホテルで一休み
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Bottom Citations - 2 Column Layout -->
+        <div class="bottom-citations">
+            <div class="text-center mb-2">
+                <strong>画像引用:</strong>
+            </div>
+            <div class="grid grid-cols-2 gap-6">
+                <div class="citation-column">
+                    <div class="mb-1">• https://res.klook.com/image/upload/c_fill,w_720,h_500,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/drzrpbpmvyf1h4z9uu4s.webp</div>
+                    <div class="mb-1">• https://img-baila.hpplus.jp/common/large/image/0e/0edab5bb-ebf3-4842-b600-62a772486da6.jpg</div>
+                    <div>• https://www.photospot-info.com/wp-content/uploads/2024/06/yuyuan-jadewatercorridor.jpg</div>
+                </div>
+                <div class="citation-column">
+                    <div class="mb-1">• https://www.photospot-info.com/wp-content/uploads/2024/04/thebund-nightview-pudongnewarea.jpg</div>
+                    <div>• https://dimg04.c-ctrip.com/images/0M71c12000i3iun21FD8A_C_750_420_R5.png_.webp</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
