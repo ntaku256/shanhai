@@ -2,53 +2,62 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>上海旅行スライド</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <title>上海旅行スライド（縦並べ）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    html, body { height: 100%; margin: 0; padding: 0; }
-    #slide-area { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
-    .nav-btn { position: fixed; top: 50%; transform: translateY(-50%); font-size: 2rem; z-index: 1000; background: rgba(0,0,0,0.3); color: white; border: none; border-radius: 50%; width: 48px; height: 48px; }
-    #prev-btn { left: 24px; }
-    #next-btn { right: 24px; }
-    iframe { width: 100vw; height: 100vh; border: none; background: white; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #222;
+    }
+    .slide-outer {
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 36px;
+      padding: 12px 0;
+    }
+    .slide-frame {
+      width: 1920px;
+      height: 1080px;
+      border: none;
+      background: white;
+      margin: 0 auto;
+      display: block;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+      border-radius: 14px;
+      transition: box-shadow 0.3s;
+    }
+
+    /* ===== スマホ対応: スケールダウン ===== */
+    @media (max-width: 1920px) {
+      .slide-frame {
+        /* 横幅を画面いっぱいにし、高さは比率で縮小 */
+        width: 100vw;
+        height: calc(100vw * 1080 / 1920);
+        max-width: 100vw;
+        max-height: 56.25vw; /* 16:9比率 */
+      }
+    }
+    /* 背景黒で中央寄せ */
+    html, body {
+      min-height: 100%;
+    }
   </style>
 </head>
 <body>
-  <button id="prev-btn" class="nav-btn">&#8592;</button>
-  <button id="next-btn" class="nav-btn">&#8594;</button>
-  <div id="slide-area">
-    <iframe id="slide-frame"></iframe>
+  <div class="slide-outer">
+    <iframe class="slide-frame" src="slides/1.html" loading="lazy"></iframe>
+    <iframe class="slide-frame" src="slides/2.html" loading="lazy"></iframe>
+    <iframe class="slide-frame" src="slides/3.html" loading="lazy"></iframe>
+    <iframe class="slide-frame" src="slides/4.html" loading="lazy"></iframe>
+    <iframe class="slide-frame" src="slides/5.html" loading="lazy"></iframe>
+    <iframe class="slide-frame" src="slides/6.html" loading="lazy"></iframe>
+    <iframe class="slide-frame" src="slides/7.html" loading="lazy"></iframe>
+    <iframe class="slide-frame" src="slides/8.html" loading="lazy"></iframe>
+    <iframe class="slide-frame" src="slides/9.html" loading="lazy"></iframe>
+    <iframe class="slide-frame" src="slides/10.html" loading="lazy"></iframe>
   </div>
-  <script>
-    // スライドファイルリスト
-    const slides = [
-      "slides/1.html",
-      "slides/2.html",
-      "slides/3.html",
-      "slides/4.html",
-      "slides/5.html",
-      "slides/6.html",
-      "slides/7.html",
-      "slides/8.html",
-      "slides/9.html",
-      "slides/10.html"
-    ];
-    let current = 0;
-    const frame = document.getElementById('slide-frame');
-    function showSlide(idx) {
-      if (idx < 0) idx = 0;
-      if (idx >= slides.length) idx = slides.length - 1;
-      frame.src = slides[idx];
-      current = idx;
-    }
-    document.getElementById('prev-btn').onclick = () => showSlide(current - 1);
-    document.getElementById('next-btn').onclick = () => showSlide(current + 1);
-    document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft') showSlide(current - 1);
-      if (e.key === 'ArrowRight') showSlide(current + 1);
-    });
-    showSlide(0);
-  </script>
 </body>
 </html>
