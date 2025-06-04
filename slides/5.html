@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3日目スケジュール</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .slide-container {
+            width: 1920px;
+            min-height: 1080px;
+            background: linear-gradient(135deg, #667eea 0%, #4a7c8c 100%);
+            position: relative;
+        }
+        .timeline-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            padding-bottom: 40px;
+        }
+        .timeline-item {
+            margin-bottom: 0.7rem;
+            animation: slideIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .event-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            border-left: 6px solid #8b5cf6;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            height: 85px;
+        }
+        .event-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        }
+        .time-badge {
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            color: white;
+            padding: 0.6rem 1rem;
+            border-radius: 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            min-width: 90px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+        .event-image {
+            width: 75px;
+            height: 75px;
+            border-radius: 1rem;
+            object-fit: cover;
+            border: 3px solid #e5e7eb;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .image-citation {
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            right: 0;
+            font-size: 0.45rem;
+            color: #6b7280;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1px 2px;
+            border-radius: 2px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .event-content {
+            flex: 1;
+        }
+        .event-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .event-description {
+            color: #6b7280;
+            font-size: 0.85rem;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .bottom-citations {
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            width: 100%;
+            transform: none;
+            max-width: none;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 160px;
+            border-radius: 0;
+            font-size: 0.7rem;
+            text-align: left;
+            line-height: 1.4;
+        }
+        .citation-column {
+            word-break: break-word;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+        .header-right-info {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 1.5rem 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container p-8">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-4 fade-in">
+            <!-- Left Side: Main Title -->
+            <div class="flex-1">
+                <h1 class="text-5xl font-bold text-white mb-3">
+                    <i class="fas fa-calendar-day mr-4 text-yellow-400"></i>
+                    3日目スケジュール
+                </h1>
+                <p class="text-xl text-gray-200">最後の上海散策・帰国</p>
+            </div>
+            
+            <!-- Right Side: Day Info -->
+            <div class="header-right-info text-white">
+                <div class="text-right">
+                    <div class="text-lg font-bold text-yellow-300 mb-2">思い出を胸に帰国へ</div>
+                    <h2 class="text-3xl font-bold text-purple-300 mb-2">3日目</h2>
+                    <p class="text-base text-gray-200">最後の散策から関西国際空港まで</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Timeline Container -->
+        <div class="timeline-container">
+            
+            <!-- Event 1: Hotel Breakfast -->
+            <div class="timeline-item" style="animation-delay: 0.2s;">
+                <div class="event-card">
+                    <div class="time-badge">09:00</div>
+                    <div style="position: relative;">
+                        <img src="https://dimg04.c-ctrip.com/images/0M71c12000i3iun21FD8A_C_750_420_R5.png_.webp" alt="ホテル朝食" class="event-image">
+                        <div class="image-citation">c-ctrip.com</div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-coffee text-orange-600"></i>
+                            ホテルで朝食
+                        </div>
+                        <div class="event-description">
+                            中国式朝食とチェックアウト
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 2: Shanghai Museum -->
+            <div class="timeline-item" style="animation-delay: 0.4s;">
+                <div class="event-card">
+                    <div class="time-badge">10:00</div>
+                    <div style="position: relative;">
+                        <img src="https://imagel.sekainavi.com/images/templates/SHANGHAI/1003590/738185b7892ee9fd_S2.jpg" alt="上海博物館" class="event-image">
+                        <div class="image-citation">sekainavi.com</div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-university text-blue-600"></i>
+                            上海博物館見学
+                        </div>
+                        <div class="event-description">
+                            中国の歴史と文化を体感
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 3: Huaihai Road Brunch -->
+            <div class="timeline-item" style="animation-delay: 0.6s;">
+                <div class="event-card">
+                    <div class="time-badge">11:30</div>
+                    <div style="position: relative;">
+                        <img src="https://www.his-j.com/images/owned-media/trip/uploads/2019/08/Tr00100420181214143130863.jpg" alt="淮海路ブランチ" class="event-image">
+                        <div class="image-citation">his-j.com</div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-utensils text-green-600"></i>
+                            淮海路でブランチ
+                        </div>
+                        <div class="event-description">
+                            最後の食事とコーヒー体験
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 4: Airport Departure -->
+            <div class="timeline-item" style="animation-delay: 0.8s;">
+                <div class="event-card">
+                    <div class="time-badge">13:00</div>
+                    <div style="position: relative;">
+                        <img src="https://res.klook.com/image/upload/c_fill,w_720,h_500,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/drzrpbpmvyf1h4z9uu4s.webp" alt="空港へ移動" class="event-image">
+                        <div class="image-citation">klook.com</div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-plane-departure text-purple-600"></i>
+                            浦東国際空港へ移動
+                        </div>
+                        <div class="event-description">
+                            マグレブで空港へ移動
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event 5: Return Home -->
+            <div class="timeline-item" style="animation-delay: 1.0s;">
+                <div class="event-card">
+                    <div class="time-badge">17:00</div>
+                    <div style="position: relative;">
+                        <img src="https://res.klook.com/image/upload/c_fill,w_720,h_500,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/drzrpbpmvyf1h4z9uu4s.webp" alt="帰国" class="event-image">
+                        <div class="image-citation">klook.com</div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-title">
+                            <i class="fas fa-home text-red-600"></i>
+                            帰国・関西国際空港到着
+                        </div>
+                        <div class="event-description">
+                            関西国際空港到着予定時刻
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Bottom Citations - 2 Column Layout -->
+        <div class="bottom-citations">
+            <div class="text-center mb-2">
+                <strong>画像引用:</strong>
+            </div>
+            <div class="grid grid-cols-2 gap-6">
+                <div class="citation-column">
+                    <div class="mb-1">• https://dimg04.c-ctrip.com/images/0M71c12000i3iun21FD8A_C_750_420_R5.png_.webp</div>
+                    <div>• https://imagel.sekainavi.com/images/templates/SHANGHAI/1003590/738185b7892ee9fd_S2.jpg</div>
+                </div>
+                <div class="citation-column">
+                    <div class="mb-1">• https://www.his-j.com/images/owned-media/trip/uploads/2019/08/Tr00100420181214143130863.jpg</div>
+                    <div>• https://res.klook.com/image/upload/c_fill,w_720,h_500,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/drzrpbpmvyf1h4z9uu4s.webp</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
