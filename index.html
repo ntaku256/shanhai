@@ -2,30 +2,29 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>1枚ずつ上海スライド（スマホ対応）</title>
+  <title>レスポンシブ上海スライド</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { margin: 0; background: #222; }
-    .slide-area {
+    body {
+      margin: 0;
+      background: #222;
+    }
+    .slide-outer {
+      width: 100vw;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 32px 0;
-      min-height: 100vh;
+      gap: 32px;
+      padding: 16px 0 32px 0;
     }
     .slide-frame-wrap {
+      position: relative;
       width: 100vw;
       max-width: 1920px;
-      /* 高さはJSで設定 */
-      position: relative;
-      margin: 0 auto 32px auto;
-      overflow: visible;
       background: transparent;
-      border-radius: 14px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.16);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow: visible;
+      margin: 0 auto;
+      /* 高さはJSで自動調整 */
       transition: height 0.3s;
     }
     .slide-scaler {
@@ -33,10 +32,6 @@
       height: 1080px;
       transform-origin: top left;
       background: transparent;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
     .slide-frame {
       width: 1920px;
@@ -45,82 +40,48 @@
       border-radius: 14px;
       background: #fff;
       display: block;
-      max-width: 100%;
-      max-height: 100%;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.16);
     }
-    .nav-btn {
-      margin: 18px 10px;
-      font-size: 1.6rem;
-      border: none;
-      border-radius: 8px;
-      padding: 0.6em 1.5em;
-      background: #333;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .nav-btn:active { background: #666; }
   </style>
 </head>
 <body>
-  <div class="slide-area">
-    <button class="nav-btn" id="prev-btn">&#8593; 前のスライド</button>
-    <div class="slide-frame-wrap">
-      <div class="slide-scaler">
-        <iframe id="slide-frame" class="slide-frame" src="slides/1.html" loading="lazy"></iframe>
-      </div>
-    </div>
-    <button class="nav-btn" id="next-btn">&#8595; 次のスライド</button>
+  <div class="slide-outer">
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/1.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/2.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/3.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/4.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/5.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/6.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/7.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/8.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/9.html" loading="lazy"></iframe></div></div>
+    <div class="slide-frame-wrap"><div class="slide-scaler"><iframe class="slide-frame" src="slides/10.html" loading="lazy"></iframe></div></div>
+    <!-- 必要な分だけ繰り返し -->
   </div>
   <script>
-    // スライド一覧
-    const slides = [
-      "slides/1.html", "slides/2.html", "slides/3.html", "slides/4.html", "slides/5.html",
-      "slides/6.html", "slides/7.html", "slides/8.html", "slides/9.html", "slides/10.html"
-    ];
-    let current = 0;
-    const frame = document.getElementById('slide-frame');
-
-    function showSlide(idx) {
-      if (idx < 0 || idx >= slides.length) return;
-      current = idx;
-      frame.src = slides[idx];
-      window.scrollTo({top: 0, behavior: "auto"});
-    }
-    document.getElementById('prev-btn').onclick = () => showSlide(current - 1);
-    document.getElementById('next-btn').onclick = () => showSlide(current + 1);
-    // キーボード操作にも対応
-    document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowUp') showSlide(current - 1);
-      if (e.key === 'ArrowDown') showSlide(current + 1);
-    });
-
-    // ★画面サイズに合わせて自動縮小
-    function fitSlideScaler() {
-      // iOS Safariはバグ多いので横スクロールで表示（縮小しない）推奨
-      // const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-      //   (navigator.userAgent.includes('Macintosh') && 'ontouchend' in document);
-
-      const wrap = document.querySelector('.slide-frame-wrap');
-      const scaler = document.querySelector('.slide-scaler');
-      // スライド本来の幅
-      const slideW = 1920, slideH = 1080;
-      // 画面横幅
+    function setSlideHeights() {
       const winW = window.innerWidth;
-      // iOSではscaleしない（バグ対策）
-      const scale = (winW < 1920) ? (winW / slideW) : 1;
-      // wrapperの高さを縮小比率で設定
-      wrap.style.height = (slideH * scale) + "px";
-      scaler.style.transform = `scale(${scale})`;
-      // iOS時のみ横スクロール可能に
-      // if (isIOS) {
-      //   wrap.style.overflowX = "auto";
-      //   scaler.style.transform = "none";
-      // }
+      const scale = winW >= 1920 ? 1 : winW / 1920;
+      document.querySelectorAll('.slide-frame-wrap').forEach(wrap => {
+        wrap.style.height = (1080 * scale) + 'px';
+        wrap.querySelector('.slide-scaler').style.transform = `scale(${scale})`;
+      });
     }
-    window.addEventListener('resize', fitSlideScaler);
-    window.addEventListener('DOMContentLoaded', fitSlideScaler);
 
+    // debounce関数
+    function debounce(func, wait) {
+      let timeout;
+      return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+      };
+    }
+
+    // 300ms間隔で反映
+    const debouncedSetSlideHeights = debounce(setSlideHeights, 300);
+
+    window.addEventListener('resize', debouncedSetSlideHeights);
+    window.addEventListener('DOMContentLoaded', setSlideHeights);
   </script>
 </body>
 </html>
